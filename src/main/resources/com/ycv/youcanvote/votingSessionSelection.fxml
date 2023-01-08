@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.text.Text?>
+<VBox stylesheets="@generalStyle.css" prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ycv.youcanvote.controller.operator.VotingSessionSelection">
+    <HBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0" />
+        </padding>
+        <Text fx:id="greetings" style="-fx-font-size: 27; -fx-fill: rgb(25, 69, 107);">
+
+        </Text>
+
+    </HBox>
+    <HBox style="-fx-alignment: center-left;">
+        <padding>
+            <Insets bottom="5.0" left="40.0" right="25.0" top="10.0" />
+        </padding>
+        <Text style="-fx-font-size: 22; -fx-fill: rgb(25, 69, 107);">
+            Selezionare le sessioni di voto nella quale si vuole esprimere un voto,
+            compresa scheda bianca.
+        </Text>
+    </HBox>
+    <VBox fx:id="formSpace">
+
+    </VBox>
+
+    <HBox>
+        <padding>
+            <Insets  left="40.0" right="25.0" />
+        </padding>
+        <Button fx:id="exitButton" styleClass="btn" text="Termina" style="-fx-font-size: 25;"/>
+
+        <HBox>
+            <padding>
+                <Insets  left="250.0" right="405.0" />
+            </padding>
+        </HBox>
+
+        <Button fx:id="continueButton" styleClass="btn" text="Avanti" style="-fx-font-size: 25;"/>
+    </HBox>
+</VBox>

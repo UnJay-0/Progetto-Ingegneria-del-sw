@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="32eede0a-b6ef-41bd-935d-1164fe0e1c5d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scenicView.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/YcvApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/SceneController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/home/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/home/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/HomeGestore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ManageVotingSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowCandidate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowVotingSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionCandidates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionSelection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/CategoricalVote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/ConfirmVote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/PreferentialVote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/RankedVote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Referendum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Vote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Individual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Party.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Vote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VoteStory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VotingSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Answer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Candidate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Individual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Party.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Session.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSessionBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/WrongCredentialsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/addCandidates.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/confirmVote.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/createVotingSession.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/generalStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/homeGestore.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small_icon_only.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small_icon_only_inverted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_white_large.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/manageVotingSession.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showCandidate.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParties.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParty.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showVotingSession.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/vote.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/votingSessionSelection.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="Interface" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2HgLY2cRlaUGxJ3gD2UwSZOW8bp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;8926687f-8599-477a-9b42-7fb8fb52816e&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/Jay/Documents/uni/ingegneria del sw/progetto/YouCanVote/src/main/java/com/ycv/youcanvote&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.ycv.youcanvote" />
+    </key>
+    <key name="ImportMappingsDialog.RecentPackages">
+      <recent name="com.ycv.youcanvote.entity" />
+      <recent name="entity" />
+      <recent name="com.ycv.youcanvote.model1" />
+      <recent name="" />
+      <recent name="com.ycv.youcanvote" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.YcvApplication">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ycv.youcanvote.HelloApplication" />
+      <module name="YouCanVote" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ycv.youcanvote.controller.home.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="YcvApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ycv.youcanvote.YcvApplication" />
+      <module name="YouCanVote" />
+      <option name="VM_PARAMETERS" value="-javaagent:$MAVEN_REPOSITORY$/net/raumzeitfalle/fx/scenic-view/11.0.2/scenic-view-11.0.2.jar" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ycv.youcanvote.controller.home.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.HelloApplication" />
+      <item itemvalue="Application.YcvApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.YcvApplication" />
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32eede0a-b6ef-41bd-935d-1164fe0e1c5d" name="Changes" comment="" />
+      <created>1668701824135</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668701824135</updated>
+      <workItem from="1668701826550" duration="4106000" />
+      <workItem from="1668707314455" duration="2974000" />
+      <workItem from="1668784082618" duration="459000" />
+      <workItem from="1668784743555" duration="7252000" />
+      <workItem from="1669022339769" duration="8313000" />
+      <workItem from="1669198315841" duration="13508000" />
+      <workItem from="1669287939302" duration="796000" />
+      <workItem from="1669804911237" duration="1455000" />
+      <workItem from="1669914445703" duration="15000" />
+      <workItem from="1669982499912" duration="299000" />
+      <workItem from="1670237182013" duration="17480000" />
+      <workItem from="1670324154219" duration="903000" />
+      <workItem from="1670411797155" duration="7453000" />
+      <workItem from="1670435522048" duration="179000" />
+      <workItem from="1670435704685" duration="762000" />
+      <workItem from="1670436931947" duration="7000" />
+      <workItem from="1670436942013" duration="3441000" />
+      <workItem from="1670493753527" duration="8455000" />
+      <workItem from="1670601258706" duration="6911000" />
+      <workItem from="1670675361650" duration="9591000" />
+      <workItem from="1670777871863" duration="5247000" />
+      <workItem from="1670842954179" duration="15503000" />
+      <workItem from="1670930321001" duration="9280000" />
+      <workItem from="1671015712072" duration="10832000" />
+      <workItem from="1671290469825" duration="10957000" />
+      <workItem from="1671530644710" duration="2698000" />
+      <workItem from="1671573576091" duration="7000" />
+      <workItem from="1671620271390" duration="6912000" />
+      <workItem from="1672138323628" duration="9532000" />
+      <workItem from="1672226691876" duration="10156000" />
+      <workItem from="1672401700334" duration="12490000" />
+      <workItem from="1672484242337" duration="11954000" />
+      <workItem from="1672655218883" duration="9916000" />
+      <workItem from="1672744767064" duration="2310000" />
+      <workItem from="1672830016703" duration="5603000" />
+      <workItem from="1672859945769" duration="31000" />
+      <workItem from="1672860470814" duration="975000" />
+      <workItem from="1672915469877" duration="6774000" />
+      <workItem from="1673020057701" duration="10473000" />
+      <workItem from="1673091457370" duration="17821000" />
+      <workItem from="1673180568103" duration="2914000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

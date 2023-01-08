@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="400.0" prefWidth="600.0"
+      stylesheets="@generalStyle.css">
+    <VBox fx:id="formSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+
+    </VBox>
+    <HBox style="-fx-spacing: 150; -fx-alignment: center">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Button fx:id="delete" text="Elimina Candidato" styleClass="btn" style="-fx-font-size: 20"/>
+        <Button fx:id="confirm" text="Conferma" styleClass="btn" style="-fx-font-size: 20"/>
+    </HBox>
+</VBox>

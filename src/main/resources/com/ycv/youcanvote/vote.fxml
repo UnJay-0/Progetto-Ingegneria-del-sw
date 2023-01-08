@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+
+<VBox fx:id="root" stylesheets="@generalStyle.css" prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="titleSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0" />
+        </padding>
+    </VBox>
+    <VBox fx:id="formSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0" />
+        </padding>
+    </VBox>
+    <HBox fx:id="terminateSpace">
+        <padding>
+            <Insets bottom="15.0" left="60.0" right="25.0" top="25.0" />
+        </padding>
+        <Button fx:id="blank" styleClass="btn" style="-fx-font-size: 20">
+            Astenersi alla scelta
+        </Button>
+
+        <HBox>
+            <padding>
+                <Insets left="80.0" top="80.0" />
+            </padding>
+        </HBox>
+
+        <Button fx:id="confirm" styleClass="btn" style="-fx-font-size: 20">
+            Conferma voto
+        </Button>
+
+
+    </HBox>
+</VBox>

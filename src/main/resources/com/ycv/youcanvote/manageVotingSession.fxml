@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ycv.youcanvote.controller.operator.ManageVotingSession"
+      prefHeight="1000.0" prefWidth="1000.0"
+      stylesheets="@generalStyle.css">
+    <padding>
+        <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+    <Label style="-fx-font-size: 45;
+           -fx-text-fill: rgb(25, 69, 107);">
+        Gestisci sessioni di voto
+    </Label>
+    <VBox fx:id="formSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+    </VBox>
+
+    <HBox style="-fx-spacing: 300; -fx-alignment: center">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Button fx:id="back" text="Indietro" styleClass="btn"/>
+        <Button text="Visualizza" styleClass="btn" onAction="#openVotingSession"/>
+    </HBox>
+
+</VBox>

@@ -1,0 +1,43 @@
+.root {
+    -fx-background-color: rgb(248, 241, 241);
+    -fx-alignment: top-center;
+}
+
+.btn {
+    -fx-text-fill: rgb(25, 69, 107);
+    -fx-font-size: 30;
+}
+
+.btn:hover {
+    -fx-text-fill: rgb(22, 199, 154);
+}
+
+.btn:pressed {
+    -fx-text-fill: rgb(17, 105, 142);
+}
+
+.clickable {
+    -fx-font-size: 32;
+    -fx-text-fill: rgb(25, 69, 107);
+}
+
+.clickable:hover {
+    -fx-text-fill: rgb(22, 199, 154);
+}
+
+.clickable:pressed {
+    -fx-text-fill: rgb(17, 105, 142);
+}
+
+
+.clickable:visited {
+    -fx-underline: none;
+}
+
+Text {
+    -fx-text-fill: rgb(25, 69, 107);
+}
+
+Label {
+    -fx-text-fill: rgb(25, 69, 107);
+}

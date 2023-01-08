@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox stylesheets="@generalStyle.css" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ycv.youcanvote.controller.home.HomeController">
+        <HBox style="-fx-alignment: top-right; -fx-spacing: 30;">
+            <padding>
+                <Insets bottom="15.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            <Hyperlink text="Area Gestori" styleClass="clickable" onAction="#areaGestori"/>
+        </HBox>
+        <VBox style="-fx-alignment: center; -fx-min-height: 100%;">
+            <StackPane>
+                <padding>
+                    <Insets bottom="20.0" top="20.0" />
+                </padding>
+                <ImageView>
+                    <Image url="@logo_small.png" />
+                </ImageView>
+            </StackPane>
+
+            <HBox style="-fx-spacing: 30; -fx-alignment: center;">
+                <padding>
+                    <Insets bottom="35.0" left="25.0" right="25.0" top="35.0" />
+                </padding>
+                <Button styleClass="btn" text="Visualizza risultati" />
+                <Button styleClass="btn" text="Vota" onAction="#vota" />
+            </HBox>
+        </VBox>
+
+</VBox>

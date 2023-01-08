@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+        maxHeight="600" maxWidth="600"
+        stylesheets="@generalStyle.css">
+    <padding>
+        <Insets  top="40.0"/>
+    </padding>
+    <Label style="-fx-font-size: 20; -fx-text-fill: rgb(25, 69, 107);">
+        Assicurarsi che il voto sia corretto:
+    </Label>
+    <VBox fx:id="voteSpace" style="-fx-alignment: center">
+        <padding>
+            <Insets  top="15.0" bottom="15.0" />
+        </padding>
+
+    </VBox>
+    <HBox style="-fx-alignment: center">
+        <padding>
+            <Insets  left="40.0" right="25.0" />
+        </padding>
+        <Button fx:id="cancelButton" styleClass="btn" text="Annulla" style="-fx-font-size: 25;"/>
+
+        <HBox>
+            <padding>
+                <Insets left="30" right="30.0" />
+            </padding>
+        </HBox>
+
+        <Button fx:id="voteButton" styleClass="btn" text="Conferma Voto" style="-fx-font-size: 25;"/>
+    </HBox>
+
+</VBox>

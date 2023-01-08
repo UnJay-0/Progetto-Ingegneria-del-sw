@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ycv.youcanvote.controller.operator.ShowParties"
+      prefHeight="1000.0" prefWidth="1000.0"
+      stylesheets="@generalStyle.css">
+
+    <VBox style="-fx-alignment: top-left">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+
+        <Label text="Lista di partiti/gruppi inseriti" style="-fx-font-size: 27; -fx-fill: rgb(25, 69, 107);"/>
+    </VBox>
+
+    <VBox fx:id="formSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+
+    </VBox>
+    <HBox style="-fx-spacing: 60; -fx-alignment: center;">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Button style="-fx-font-size: 20;" styleClass="btn" text="Indietro" onAction="#back"/>
+        <Button style="-fx-font-size: 20;" styleClass="btn" text="Modifica Partito/Gruppo" onAction="#modifyParty"/>
+        <Button style="-fx-font-size: 20;" styleClass="btn" text="Crea Partito/Gruppo" onAction="#createParty"/>
+        <Button style="-fx-font-size: 20;" styleClass="btn" text="Elimina Partito/Gruppo" onAction="#deleteParty"/>
+    </HBox>
+
+</VBox>

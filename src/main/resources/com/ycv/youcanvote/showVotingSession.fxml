@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="1000.0" prefWidth="1000.0"
+      stylesheets="@generalStyle.css"
+      style="-fx-alignment: top-left;">
+    <padding>
+        <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+
+    <VBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Label fx:id="sessionName"
+               style="-fx-font-size: 45;
+           -fx-text-fill: rgb(25, 69, 107);">
+        </Label>
+    </VBox>
+
+
+    <VBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Text fx:id="description" style="-fx-font-size: 20; -fx-text-fill: rgb(25, 69, 107);">
+        </Text>
+    </VBox>
+
+
+    <VBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Label fx:id="status" style="-fx-font-size: 25;
+                                 -fx-text-fill: rgb(25, 69, 107);">
+        </Label>
+    </VBox>
+
+    <VBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Label fx:id="date" style="-fx-font-size: 25;
+                               -fx-text-fill: rgb(25, 69, 107);">
+        </Label>
+
+    </VBox>
+
+    <VBox>
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Label fx:id="nVote" style="-fx-font-size: 25;
+                                    -fx-text-fill: rgb(25, 69, 107); ">
+        </Label>
+    </VBox>
+
+    <VBox fx:id="formSpace" style="-fx-alignment: center;">
+        <Label style="-fx-text-fill: rgb(25, 69, 107); -fx-font-size: 25">
+            Candidati
+        </Label>
+
+    </VBox>
+
+    <HBox style="-fx-spacing: 200; -fx-alignment: center">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Button fx:id="back" text="Indietro" styleClass="btn" style="-fx-font-size: 20"/>
+        <Button fx:id="close" text="Chiudi sessione" styleClass="btn" style="-fx-font-size: 20"/>
+        <Button fx:id="open" text="Visualizza risultati" styleClass="btn" style="-fx-font-size: 20"/>
+    </HBox>
+</VBox>

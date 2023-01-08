@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="1000.0" prefWidth="1000.0" stylesheets="@generalStyle.css">
+    <padding>
+        <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+    <VBox fx:id="formSpace">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+
+    </VBox>
+
+
+    <HBox style="-fx-spacing: 300; -fx-alignment: center">
+        <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>
+        </padding>
+        <Button fx:id="back" text="Indietro" styleClass="btn"/>
+        <Button fx:id="forward" text="Avanti" styleClass="btn"/>
+    </HBox>
+</VBox>
