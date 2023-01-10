@@ -15,4 +15,9 @@ public class Answer implements Candidate {
     public String toString() {
         return this.answer;
     }
+
+    @Override
+    public void alterName(String name) {
+
+    }
 }

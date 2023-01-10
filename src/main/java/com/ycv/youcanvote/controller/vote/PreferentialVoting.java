@@ -6,9 +6,12 @@ import com.dlsc.formsfx.model.structure.MultiSelectionField;
 import com.dlsc.formsfx.view.controls.SimpleCheckBoxControl;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
+import com.ycv.youcanvote.entity.Vote;
+import com.ycv.youcanvote.entity.VoteStory;
 import com.ycv.youcanvote.model.Candidate;
-import com.ycv.youcanvote.model.Party;
+import com.ycv.youcanvote.entity.Party;
 import com.ycv.youcanvote.entity.VotingSession;
+import com.ycv.youcanvote.model.Session;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -21,7 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PreferentialVote implements Vote {
+public class PreferentialVoting implements Voting {
 
     private final Party choice;
 
@@ -44,10 +47,11 @@ public class PreferentialVote implements Vote {
     @FXML
     private Button blank;
 
-    public PreferentialVote(Party choice, VotingSession session) {
+    public PreferentialVoting(Party choice, VotingSession session) {
         this.choice = choice;
         this.votingSession = session;
     }
+
 
     public void initialize() {
         Label voteTitle = new Label("Voto Preferenziale per scelta: " + choice.name());
@@ -89,14 +93,34 @@ public class PreferentialVote implements Vote {
     }
 
     private void blankVote() {
-        System.out.println("Blank vote");
+        Vote vote = new Vote(
+                "Bianca",
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
         Stage thisStage = (Stage) formSpace.getScene().getWindow();
         thisStage.close();
     }
 
+    private String selectionToString() {
+        StringBuilder str = new StringBuilder();
+        str.append(choice.toString()).append(";");
+        for(Candidate c : members.getSelection()) {
+            str.append(c.toString()).append(";");
+        }
+        return str.toString();
+    }
     @Override
     public void confirmVote() {
-        System.out.println(votingSession.getName() + ": " + choice + "\n" + members.getSelection());
+        Vote vote = new Vote(
+                selectionToString(),
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
     }
 
     @Override

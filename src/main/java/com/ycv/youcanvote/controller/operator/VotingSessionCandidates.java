@@ -6,7 +6,9 @@ import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.model.structure.SingleSelectionField;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
+import com.ycv.youcanvote.entity.Individual;
 import com.ycv.youcanvote.model.*;
+import com.ycv.youcanvote.entity.Party;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -49,36 +51,15 @@ public class VotingSessionCandidates {
 
     @FXML
     private void initialize() {
-        // TODO: dao per ottenere i gruppi
-
-        // TEST ---------------------------------------
-        List<Candidate> candidates = new ArrayList<>();
-        candidates.add(new Individual("BENEE"));
-        candidates.add(new Individual("Birthh"));
-        candidates.add(new Individual("070 Shake"));
-        candidates.add(new Individual("Dominic Fike"));
-
-        List<Candidate> candidates2 = new ArrayList<>();
-        candidates2.add(new Individual("Dario Moccia"));
-        candidates2.add(new Individual("Mangaka96"));
-        candidates2.add(new Individual("Marco Merrino"));
-        candidates2.add(new Individual("Voghelita"));
-
-        Party artisti = new Party(candidates, "Musicians");
-        Party streamers = new Party(candidates2, "Streamers");
-        // TEST ---------------------------------------
 
         if(build.isPartyVoting()){
-            toSelect = new ArrayList<>();
-            toSelect.add(artisti);
-            toSelect.add(streamers);
-            candidatesSelectionField = Field.ofSingleSelectionType(toSelect);
+            List<Party> parties = Party.getParty();
+            toSelect = new ArrayList<>(parties);
         } else {
-            toSelect = new ArrayList<>();
-            toSelect.addAll(artisti.getMembers());
-            toSelect.addAll(streamers.getMembers());
-            candidatesSelectionField = Field.ofSingleSelectionType(toSelect);
+            List<Individual> individuals = Individual.getIndividual();
+            toSelect = new ArrayList<>(individuals);
         }
+        candidatesSelectionField = Field.ofSingleSelectionType(toSelect);
 
         Form form = Form.of(
                 Group.of(
@@ -95,10 +76,10 @@ public class VotingSessionCandidates {
 
         formSpace.getChildren().addAll(new FormRenderer(form), addCandidate);
         formSpace.setAlignment(Pos.CENTER);
-
+        forward.setText("Completa e salva");
         forward.setOnAction(event -> {
             build.setCandidateList(selectedCandidates);
-            System.out.println(build.getVotingSession());
+            build.saveVotingSession();
             try {
                 SceneController.switchScene(forward, "homeGestore.fxml");
             } catch (IOException e) {

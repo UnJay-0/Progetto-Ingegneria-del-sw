@@ -3,9 +3,12 @@ package com.ycv.youcanvote.model;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import com.ycv.youcanvote.entity.User;
 
-import java.util.Date;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 /**
  * OVERVIEW:
@@ -17,8 +20,8 @@ public class Session {
     private static Session current = null;
     private User user = null;
 
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
+    private final EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager;
 
     private Session() {
         entityManagerFactory = Persistence.createEntityManagerFactory("default");
@@ -58,10 +61,33 @@ public class Session {
      */
     public void setUser(String cf, String pwd, boolean forOperator) throws WrongCredentialsException{
         if (!userLogged()) {
-            // TODO: impostare il DAO
-            user = new User("jonathan", "agyekum",
-                    new Date(938275890), "Como", forOperator);
+            User user = User.getUserById(cf);
+            if(user.getPassword().equals(pwdToSHA256(pwd)) && (user.getOperator() || (!forOperator && !user.getOperator()))) {
+                this.user = user;
+            } else {
+                throw new WrongCredentialsException();
+            }
         }
+    }
+
+    private String pwdToSHA256(String pwd) {
+        MessageDigest digest;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+        byte[] hash = digest.digest(
+                pwd.getBytes(StandardCharsets.UTF_8));
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (byte b : hash) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
     }
 
     /**
@@ -76,10 +102,8 @@ public class Session {
         return user;
     }
 
-    public VotingSession getActiveVotingSessions(){
-        //TODO: DAO PER VOTING SESSIONS
-        return null;
-    }
+
+
 
     public EntityManager getEntityManager() {
         return entityManager;

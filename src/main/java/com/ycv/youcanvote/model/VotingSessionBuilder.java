@@ -1,7 +1,7 @@
 package com.ycv.youcanvote.model;
 
 import com.ycv.youcanvote.entity.VotingSession;
-import com.ycv.youcanvote.model.Candidate;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
@@ -57,12 +57,13 @@ public class VotingSessionBuilder {
     }
 
     public VotingSession getVotingSession() {
-        return null; //new VotingSession(name, description, candidateList, type.toString());
+        return new VotingSession(name, description, candidateList, type.toString(), resultMod.toString());
     }
 
-
-
     public void saveVotingSession() {
-
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(getVotingSession());
+        entityManager.getTransaction().commit();
     }
 }

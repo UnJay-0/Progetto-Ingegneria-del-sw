@@ -20,29 +20,29 @@ public class ConfirmVote {
     @FXML
     private VBox voteSpace;
 
-    private final Vote vote;
+    private final Voting voting;
 
-    public ConfirmVote(Vote vote) {
-        this.vote = vote;
+    public ConfirmVote(Voting voting) {
+        this.voting = voting;
     }
 
     @FXML
     public void initialize() {
-        voteSpace.getChildren().add(vote.render());
+        voteSpace.getChildren().add(voting.render());
         voteButton.setOnAction(e -> confirmVote());
         cancelButton.setOnAction(e -> cancelVote());
 
     }
 
     private void confirmVote() {
-        vote.confirmVote();
+        voting.confirmVote();
         Stage thisStage = (Stage) voteSpace.getScene().getWindow();
         thisStage.close();
     }
 
     private void cancelVote() {
         try {
-            SceneController.switchScene(cancelButton, "vote.fxml", vote);
+            SceneController.switchScene(cancelButton, "voting.fxml", voting);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

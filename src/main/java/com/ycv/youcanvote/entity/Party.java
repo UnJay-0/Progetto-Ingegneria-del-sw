@@ -1,6 +1,7 @@
 package com.ycv.youcanvote.entity;
 
 import com.ycv.youcanvote.model.Candidate;
+import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,8 +31,8 @@ public class Party implements Candidate {
 
 
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "party_generator")
-    @SequenceGenerator(name="party_generator", sequenceName = "party_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Candidate_generator")
+    @SequenceGenerator(name="Candidate_generator", sequenceName = "candidate_sequence", allocationSize = 1)
     @Id
     @Column(name = "party_id")
     private long partyId;
@@ -47,9 +48,55 @@ public class Party implements Candidate {
 
     public Party(@NotNull String name) {
         if(name.equals("")) {
-            throw new IllegalArgumentException("name can't be null");
+            throw new IllegalArgumentException("name can't be empty");
         }
         this.name = name;
+    }
+
+    @Override
+    public void alterName(String name) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("UPDATE Party set name=?1 WHERE partyId=?2")
+                .setParameter(1, name)
+                .setParameter(2, this.getPartyId())
+                .executeUpdate();
+        entityManager.getTransaction().commit();
+        this.name = name;
+    }
+
+    public static Party getPartyById(long id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Party party = entityManager.createNamedQuery("Party.byId", Party.class)
+                .setParameter(1, id)
+                .getSingleResult();
+
+        entityManager.getTransaction().commit();
+        return  party;
+    }
+
+    public static Party getPartyByIdAndName(long id, String name) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Party party = entityManager.createNamedQuery("Party.byIdAndName", Party.class)
+                .setParameter(1, id)
+                .setParameter(2, name)
+                .getSingleResult();
+
+
+        entityManager.getTransaction().commit();
+        return  party;
+    }
+
+    public static List<Party> getParty() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<Party> partyList = entityManager.createNamedQuery("Party.all", Party.class).getResultList();
+        entityManager.getTransaction().commit();
+        return partyList;
     }
 
     public long getPartyId() {
@@ -86,7 +133,7 @@ public class Party implements Candidate {
     }
 
     public List<Candidate> getMembers() {
-        return null;
+        return new ArrayList<>(Individual.getIndividualByPartyId(this.getPartyId()));
     }
 
     private void setIndividualsByPartyId(Collection<Individual> individualsByPartyId) {

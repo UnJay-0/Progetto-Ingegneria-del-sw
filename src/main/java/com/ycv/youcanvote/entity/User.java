@@ -1,5 +1,6 @@
 package com.ycv.youcanvote.entity;
 
+import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -61,6 +62,19 @@ public class User {
     private Collection<VoteStory> voteStoriesByCf;
 
 
+    public static User getUserById(String id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        User user = entityManager.createNamedQuery("User.byId", User.class)
+                .setParameter(1, id)
+                .getSingleResult();
+
+
+        entityManager.getTransaction().commit();
+
+        return  user;
+    }
     public String getCf() {
         return cf;
     }

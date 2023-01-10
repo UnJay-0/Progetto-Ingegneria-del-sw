@@ -6,8 +6,11 @@ import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.model.structure.SingleSelectionField;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
+import com.ycv.youcanvote.entity.VoteStory;
 import com.ycv.youcanvote.model.Candidate;
 import com.ycv.youcanvote.entity.VotingSession;
+import com.ycv.youcanvote.entity.Vote;
+import com.ycv.youcanvote.model.Session;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,7 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Referendum implements Vote {
+public class Referendum implements Voting {
     private final VotingSession votingSession;
 
     private SingleSelectionField<Candidate> candidateSelect;
@@ -72,14 +75,26 @@ public class Referendum implements Vote {
     }
 
     private void blankVote() {
-        System.out.println("Blank vote");
+        Vote vote = new Vote(
+                "Bianca",
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
         Stage thisStage = (Stage) formSpace.getScene().getWindow();
         thisStage.close();
     }
 
     @Override
     public void confirmVote() {
-        System.out.println(candidateSelect.getSelection() + "\n" + votingSession.toString());
+        Vote vote = new Vote(
+                this.candidateSelect.getSelection().toString(),
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
     }
 
     @Override

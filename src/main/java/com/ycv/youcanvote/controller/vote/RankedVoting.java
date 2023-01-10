@@ -6,8 +6,11 @@ import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.model.structure.MultiSelectionField;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
+import com.ycv.youcanvote.entity.Vote;
+import com.ycv.youcanvote.entity.VoteStory;
 import com.ycv.youcanvote.model.Candidate;
 import com.ycv.youcanvote.entity.VotingSession;
+import com.ycv.youcanvote.model.Session;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,7 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RankedVote implements Vote {
+public class RankedVoting implements Voting {
     private final List<Candidate> candidates;
     private final VotingSession votingSession;
 
@@ -42,7 +45,7 @@ public class RankedVote implements Vote {
     @FXML
     private Button blank;
 
-    public RankedVote(VotingSession votingSession) {
+    public RankedVoting(VotingSession votingSession) {
         this.candidates = votingSession.getCandidatesList();
         this.votingSession = votingSession;
     }
@@ -105,14 +108,33 @@ public class RankedVote implements Vote {
         return selection;
     }
 
-    //TODO: conferma voto dao
+
+    private String selectionToString() {
+        StringBuilder str = new StringBuilder();
+        for(Candidate c : candidateSelect.getSelection()) {
+            str.append(c.toString()).append(";");
+        }
+        return str.toString();
+    }
     @Override
     public void confirmVote() {
-        System.out.println(candidates + "\n" + votingSession.toString());
+        Vote vote = new Vote(
+                selectionToString(),
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
     }
 
     private void blankVote() {
-        System.out.println("Blank vote");
+        Vote vote = new Vote(
+                "Bianca",
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
         Stage thisStage = (Stage) formSpace.getScene().getWindow();
         thisStage.close();
     }

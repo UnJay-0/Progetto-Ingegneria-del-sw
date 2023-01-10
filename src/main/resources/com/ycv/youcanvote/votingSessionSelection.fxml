@@ -6,7 +6,7 @@
 
 
 <?import javafx.scene.text.Text?>
-<VBox stylesheets="@generalStyle.css" prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ycv.youcanvote.controller.operator.VotingSessionSelection">
+<VBox stylesheets="@generalStyle.css" prefHeight="600" prefWidth="600" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ycv.youcanvote.controller.vote.VotingSessionSelection">
     <HBox>
         <padding>
             <Insets bottom="15.0" left="25.0" right="25.0" top="25.0" />

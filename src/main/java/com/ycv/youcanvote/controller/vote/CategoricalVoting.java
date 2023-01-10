@@ -6,9 +6,12 @@ import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.model.structure.SingleSelectionField;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
+import com.ycv.youcanvote.entity.Vote;
+import com.ycv.youcanvote.entity.VoteStory;
 import com.ycv.youcanvote.model.Candidate;
-import com.ycv.youcanvote.model.Party;
+import com.ycv.youcanvote.entity.Party;
 import com.ycv.youcanvote.entity.VotingSession;
+import com.ycv.youcanvote.model.Session;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,7 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CategoricalVote implements Vote {
+public class CategoricalVoting implements Voting {
 
     private final VotingSession votingSession;
 
@@ -40,18 +43,18 @@ public class CategoricalVote implements Vote {
     private Button blank;
 
 
-    private CategoricalVote(VotingSession session, boolean isPreferential) {
+    private CategoricalVoting(VotingSession session, boolean isPreferential) {
         this.votingSession = session;
         this.candidateSelect = Field.ofSingleSelectionType(votingSession.getCandidatesList()).label("Preferenza");
         this.isPreferential = isPreferential;
     }
 
-    public static CategoricalVote createCategoricalVote(VotingSession session) {
-        return new CategoricalVote(session, false);
+    public static CategoricalVoting createCategoricalVote(VotingSession session) {
+        return new CategoricalVoting(session, false);
     }
 
-    public static CategoricalVote createPreferentialVote(VotingSession session) {
-        return new CategoricalVote(session, true);
+    public static CategoricalVoting createPreferentialVote(VotingSession session) {
+        return new CategoricalVoting(session, true);
     }
 
     @FXML
@@ -68,7 +71,7 @@ public class CategoricalVote implements Vote {
                     throw new RuntimeException(ex);
                 }
             } else {
-                PreferentialVote preferentialVote = new PreferentialVote(((Party) candidateSelect.getSelection()), votingSession);
+                PreferentialVoting preferentialVote = new PreferentialVoting(((Party) candidateSelect.getSelection()), votingSession);
                 try {
                     SceneController.switchScene(confirm, "vote.fxml", preferentialVote);
                 } catch (IOException ex) {
@@ -89,11 +92,31 @@ public class CategoricalVote implements Vote {
         formSpace.getChildren().add(new FormRenderer(form));
     }
 
+    private String selectionToString() {
+        StringBuilder str = new StringBuilder();
+        Candidate c = candidateSelect.getSelection();
+        str.append(c.toString()).append(";");
+
+        return str.toString();
+    }
+
     public void confirmVote() {
-        System.out.println(candidateSelect.getSelection() + "\n" + votingSession.toString());
+        Vote vote = new Vote(
+                selectionToString(),
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
     }
     private void blankVote() {
-        System.out.println("Blank vote");
+        Vote vote = new Vote(
+                "Bianca",
+                this.votingSession
+        );
+        Vote.saveVote(vote);
+        VoteStory voteStory = new VoteStory(Session.getInstance().getUser(), votingSession);
+        VoteStory.saveVoteStory(voteStory);
         Stage thisStage = (Stage) formSpace.getScene().getWindow();
         thisStage.close();
     }

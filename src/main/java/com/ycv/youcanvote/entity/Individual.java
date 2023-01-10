@@ -1,9 +1,11 @@
 package com.ycv.youcanvote.entity;
 
 import com.ycv.youcanvote.model.Candidate;
+import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,9 +27,10 @@ import java.util.Objects;
 @NamedQuery(name="Individual.byId", query="SELECT e FROM Individual e WHERE e.individualId=?1")
 @NamedQuery(name="Individual.byIdAndName", query="SELECT e FROM Individual e WHERE e.individualId=?1 AND e.name=?2")
 @NamedQuery(name="Individual.byPartyId", query="SELECT e FROM Individual e WHERE e.partyByPartyId.partyId=?1")
+@NamedQuery(name="Individual.all", query="SELECT e FROM Individual e")
 public class Individual implements Candidate {
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Individual_generator")
-    @SequenceGenerator(name="Individual_generator", sequenceName = "Individual_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Candidate_generator")
+    @SequenceGenerator(name="Candidate_generator", sequenceName = "candidate_sequence", allocationSize = 1)
     @Id
     @Column(name = "individual_id")
     private long individualId;
@@ -54,6 +57,62 @@ public class Individual implements Candidate {
         }
         partyByPartyId = party;
         this.name = name;
+    }
+
+    public void alterName(String name) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.createQuery("UPDATE Individual set name=?1 WHERE individualId=?2")
+                .setParameter(1, name)
+                .setParameter(2, this.getIndividualId())
+                .executeUpdate();
+        entityManager.getTransaction().commit();
+        this.name = name;
+    }
+
+    public static Individual getIndividualById(long id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Individual individual = entityManager.createNamedQuery("Individual.byId", Individual.class)
+                .setParameter(1, id)
+                .getSingleResult();
+
+
+        entityManager.getTransaction().commit();
+        return  individual;
+    }
+
+    public static Individual getIndividualByIdAndName(long id, String name) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        Individual individual = entityManager.createNamedQuery("Individual.byIdAndName", Individual.class)
+                .setParameter(1, id)
+                .setParameter(2, name)
+                .getSingleResult();
+
+
+        entityManager.getTransaction().commit();
+        return  individual;
+    }
+
+    public static List<Individual> getIndividual() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<Individual> individualList = entityManager.createNamedQuery("Individual.all", Individual.class).getResultList();
+        entityManager.getTransaction().commit();
+        return individualList;
+    }
+
+    public static List<Individual> getIndividualByPartyId(long id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<Individual> individualList = entityManager.createNamedQuery("Individual.byPartyId", Individual.class)
+                .setParameter(1, id)
+                .getResultList();
+        entityManager.getTransaction().commit();
+        return individualList;
     }
 
     /**

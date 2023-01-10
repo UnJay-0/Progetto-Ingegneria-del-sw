@@ -4,77 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32eede0a-b6ef-41bd-935d-1164fe0e1c5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scenicView.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/YcvApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/SceneController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/home/HomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/home/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/HomeGestore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ManageVotingSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowCandidate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParty.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowVotingSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionCandidates.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionSelection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/CategoricalVote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/ConfirmVote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/PreferentialVote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/RankedVote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Referendum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Vote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Individual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Party.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Vote.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VoteStory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VotingSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Answer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Candidate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Individual.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Party.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Session.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSessionBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/WrongCredentialsException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/addCandidates.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/confirmVote.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/createVotingSession.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/generalStyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/home.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/homeGestore.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/login.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_large.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small_icon_only.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_small_icon_only_inverted.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/logo_white_large.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/manageVotingSession.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showCandidate.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParties.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParty.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showVotingSession.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/vote.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/votingSessionSelection.fxml" afterDir="false" />
+    <list default="true" id="32eede0a-b6ef-41bd-935d-1164fe0e1c5d" name="Changes" comment="dao correct">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenicView.properties" beforeDir="false" afterPath="$PROJECT_DIR$/scenicView.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/YcvApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/YcvApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ManageVotingSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ManageVotingSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowCandidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowCandidate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowParty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowVotingSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/ShowVotingSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionCandidates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionCandidates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/operator/VotingSessionSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/VotingSessionSelection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/CategoricalVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/CategoricalVoting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/ConfirmVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/ConfirmVote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/PreferentialVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/PreferentialVoting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/RankedVote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/RankedVoting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Referendum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Referendum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/controller/vote/Voting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Individual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Individual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Party.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Party.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Vote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/Vote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VoteStory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VoteStory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VotingSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/entity/VotingSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Candidate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Candidate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Individual.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Party.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSessionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ycv/youcanvote/model/VotingSessionBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParties.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParties.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParty.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/showParty.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/votingSessionSelection.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ycv/youcanvote/votingSessionSelection.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +62,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2HgLY2cRlaUGxJ3gD2UwSZOW8bp" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -232,8 +196,18 @@
       <workItem from="1672915469877" duration="6774000" />
       <workItem from="1673020057701" duration="10473000" />
       <workItem from="1673091457370" duration="17821000" />
-      <workItem from="1673180568103" duration="2914000" />
+      <workItem from="1673180568103" duration="18793000" />
+      <workItem from="1673259171546" duration="13451000" />
+      <workItem from="1673349270390" duration="1980000" />
     </task>
+    <task id="LOCAL-00001" summary="dao correct">
+      <created>1673187167231</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1673187167231</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,5 +226,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="dao correct" />
+    <option name="LAST_COMMIT_MESSAGE" value="dao correct" />
   </component>
 </project>

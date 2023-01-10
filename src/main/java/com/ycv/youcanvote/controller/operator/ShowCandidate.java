@@ -5,8 +5,9 @@ import com.dlsc.formsfx.model.structure.Form;
 import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.model.structure.StringField;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
+import com.ycv.youcanvote.entity.Party;
 import com.ycv.youcanvote.model.Candidate;
-import com.ycv.youcanvote.model.Individual;
+import com.ycv.youcanvote.entity.Individual;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -31,11 +32,17 @@ public class ShowCandidate {
     @FXML
     private Button confirm;
 
-    public ShowCandidate(){
+    private Candidate toModify;
+    private Party party;
+
+    public ShowCandidate(Party party){
         candidateName = "";
+        this.party = party;
     }
 
-    public ShowCandidate(Candidate toModify) {
+    public ShowCandidate(Candidate toModify, Party party) {
+        this.toModify = toModify;
+        this.party = party;
         candidateName = toModify.name();
     }
 
@@ -65,7 +72,14 @@ public class ShowCandidate {
     }
 
     public Candidate getCandidate() {
-        return new Individual(name.getValue());
+        if (this.toModify == null)
+            return new Individual(name.getValue(), party);
+        else if(!this.hasBeenDeleted){
+            toModify.alterName(name.getValue());
+            return toModify;
+        } else {
+            return toModify;
+        }
     }
 
     public boolean hasBeenDeleted() {

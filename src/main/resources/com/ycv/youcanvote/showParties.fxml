@@ -25,6 +25,15 @@
         </padding>
 
     </VBox>
+
+    <HBox style="-fx-alignment: center">
+        <Label fx:id="resultText" style="-fx-text-fill: rgb(255,0,0);">
+            <padding>
+                <Insets bottom="20.0" top="20.0" />
+            </padding>
+        </Label>
+    </HBox>
+
     <HBox style="-fx-spacing: 60; -fx-alignment: center;">
         <padding>
             <Insets bottom="15.0" left="25.0" right="25.0" top="25.0"/>

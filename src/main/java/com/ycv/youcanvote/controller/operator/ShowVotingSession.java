@@ -5,7 +5,7 @@ import com.dlsc.formsfx.model.structure.Form;
 import com.dlsc.formsfx.model.structure.Group;
 import com.dlsc.formsfx.view.renderer.FormRenderer;
 import com.ycv.youcanvote.controller.SceneController;
-import com.ycv.youcanvote.model.VotingSession;
+import com.ycv.youcanvote.entity.VotingSession;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -55,7 +55,7 @@ public class ShowVotingSession {
         sessionName.setText(selected.getName());
         description.setText(selected.getDescription());
         status.setText("Stato: " + (selected.isOpen() ? "Aperta" : "Chiusa"));
-        date.setText("Data di apertura: " + selected.getDateOfCreation());
+        date.setText("Data di apertura: " + selected.getCreationDate());
         nVote.setText("Numero di voti: " + selected.nVote());
         back.setOnAction(event -> {
             try {
@@ -78,7 +78,7 @@ public class ShowVotingSession {
         });
         Form form = Form.of(
                 Group.of(
-                        Field.ofMultiSelectionType(selected.getCandidates())
+                        Field.ofMultiSelectionType(selected.getCandidatesList())
                 )
         );
 

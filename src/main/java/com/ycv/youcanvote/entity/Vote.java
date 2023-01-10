@@ -1,12 +1,14 @@
 package com.ycv.youcanvote.entity;
 
+import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
- * OVERVIEW: The instances of Vote represent votes expressed on a specific
+ * OVERVIEW: The instances of Voting represent votes expressed on a specific
  * voting session. They are defined by a selection of candidates and the
  * referred voting session.
  * <br/><br/>
@@ -19,7 +21,7 @@ import java.util.Objects;
  * <br/>
  *
  * ABS FUN:
- * ABS(Vote) -> {selection, abs(votingSession)}
+ * ABS(Voting) -> {selection, abs(votingSession)}
  * <br/>
  *
  */
@@ -53,6 +55,23 @@ public class Vote {
         }
         this.selection = selection;
         this.votingSessionByVsId = session;
+    }
+
+    public static void saveVote(Vote vote) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(vote);
+        entityManager.getTransaction().commit();
+    }
+
+    public static List<Vote> getVotesByVsId(long id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<Vote> voteList = entityManager.createNamedQuery("Vote.byVotingSession", Vote.class)
+                .setParameter(1, id)
+                .getResultList();
+        entityManager.getTransaction().commit();
+        return voteList;
     }
 
     /**

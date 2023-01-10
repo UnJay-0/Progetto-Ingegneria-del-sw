@@ -1,11 +1,10 @@
 package com.ycv.youcanvote.entity;
 
-import com.ycv.youcanvote.controller.vote.CategoricalVote;
-import com.ycv.youcanvote.controller.vote.RankedVote;
-import com.ycv.youcanvote.controller.vote.Referendum;
-import com.ycv.youcanvote.controller.vote.Vote;
+import com.ycv.youcanvote.controller.vote.*;
+import com.ycv.youcanvote.controller.vote.CategoricalVoting;
+import com.ycv.youcanvote.controller.vote.Voting;
 import com.ycv.youcanvote.model.Candidate;
-import com.ycv.youcanvote.model.Party;
+import com.ycv.youcanvote.entity.Party;
 import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
@@ -100,34 +99,33 @@ public class VotingSession {
         this.vsId = 0;
     }
 
-    public Vote getVote() {
+    public Voting getVote() {
         String typeOfVote = type.split(";")[0];
-        return TypeOfVote.valueOf(typeOfVote).getController(this);
+        return TypeOfVote.fromString(typeOfVote).getController(this);
     }
 
     public List<Candidate> getCandidatesList() {
         EntityManager entityManager = Session.getInstance().getEntityManager();
         List<Candidate> candidatesList = new ArrayList<>();
         for(String candidateToStr : candidates.split(";")) {
-            String name = candidateToStr.split("\n")[0];
+
             Long id = Long.parseLong(candidateToStr.split("\n")[1].split(" ")[1]);
+
 
             try {
                 entityManager.getTransaction().begin();
 
                 TypedQuery<Individual> getIndividual = entityManager.createNamedQuery(
-                        "Individual.byIdAndName", Individual.class);
+                        "Individual.byId", Individual.class);
                 getIndividual.setParameter(1, id);
-                getIndividual.setParameter(2, name);
 
                 if(getIndividual.getResultList().size() != 0) {
                     candidatesList.add(getIndividual.getSingleResult());
                 } else {
                     TypedQuery<Party> getParty = entityManager.createNamedQuery(
-                            "Party.byIdAndName", Party.class);
+                            "Party.byId", Party.class);
                     getParty.setParameter(1, id);
-                    getParty.setParameter(2, name);
-                    candidatesList.add(getIndividual.getSingleResult());
+                    candidatesList.add(getParty.getSingleResult());
                 }
             } finally {
                 entityManager.getTransaction().commit();
@@ -143,8 +141,10 @@ public class VotingSession {
      */
     public void close() {
         EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
         entityManager.createQuery("UPDATE VotingSession set isOpen=false WHERE vsId=?1")
                 .setParameter(1, this.vsId).executeUpdate();
+        entityManager.getTransaction().commit();
         this.isOpen = false;
     }
 
@@ -239,6 +239,46 @@ public class VotingSession {
         isOpen = open;
     }
 
+    public static List<VotingSession> getVotingSession() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<VotingSession> votingSessionList = entityManager.createNamedQuery("VotingSession.all", VotingSession.class).getResultList();
+        entityManager.getTransaction().commit();
+        return votingSessionList;
+    }
+
+    public static VotingSession getVotingSessionById(long id) {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        VotingSession votingSession = entityManager.createNamedQuery("VotingSession.byId", VotingSession.class)
+                .setParameter(1, id)
+                .getSingleResult();
+
+
+        entityManager.getTransaction().commit();
+
+        return  votingSession;
+    }
+
+    public static List<VotingSession> getOpenVotingSession() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<VotingSession> votingSessionList = entityManager.createNamedQuery("VotingSession.ifOpen", VotingSession.class).getResultList();
+        entityManager.getTransaction().commit();
+        return votingSessionList;
+    }
+
+    public static List<VotingSession> getCloseVotingSession() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        List<VotingSession> votingSessionList = entityManager.createNamedQuery("VotingSession.ifClose", VotingSession.class).getResultList();
+        entityManager.getTransaction().commit();
+        return votingSessionList;
+    }
+
+
+
     @Override
     public String toString() {
         return name + "\n" + description;
@@ -259,26 +299,26 @@ public class VotingSession {
 
     public enum TypeOfVote {
         RANKEDVOTE("Ordinale", Arrays.asList(ResultMod.MAJORITY, ResultMod.ABS_MAJORITY)) {
-            Vote getController(VotingSession session) {
-                return new RankedVote(session);
+            Voting getController(VotingSession session) {
+                return new RankedVoting(session);
             }
 
         },
         CATEGORICALVOTE("Categorico", Arrays.asList(ResultMod.MAJORITY, VotingSession.ResultMod.ABS_MAJORITY)) {
 
-            Vote getController(VotingSession session) {
-                return CategoricalVote.createCategoricalVote(session);
+            Voting getController(VotingSession session) {
+                return CategoricalVoting.createCategoricalVote(session);
             }
         },
         PREFERENTIALVOTE("Categorico Preferenziale", Arrays.asList(VotingSession.ResultMod.MAJORITY, VotingSession.ResultMod.ABS_MAJORITY)) {
 
-            com.ycv.youcanvote.controller.vote.Vote getController(VotingSession session) {
-                return CategoricalVote.createPreferentialVote(session);
+            Voting getController(VotingSession session) {
+                return CategoricalVoting.createPreferentialVote(session);
             }
         },
 
         REFERENDUM("Referendum", Arrays.asList(ResultMod.W_QUORUM, ResultMod.WO_QUORUM)) {
-            com.ycv.youcanvote.controller.vote.Vote getController(VotingSession session) {
+            Voting getController(VotingSession session) {
                 return new Referendum(session);
             }
         };
@@ -302,7 +342,7 @@ public class VotingSession {
             return name;
         }
 
-        abstract Vote getController(VotingSession session);
+        abstract Voting getController(VotingSession session);
 
         public List<ResultMod> getMods() {
 
