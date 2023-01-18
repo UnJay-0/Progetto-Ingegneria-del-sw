@@ -62,4 +62,13 @@ public class HomeController {
 
 
     }
+
+    public void visualizza(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        try {
+            SceneController.switchScene(node, "homeResults.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

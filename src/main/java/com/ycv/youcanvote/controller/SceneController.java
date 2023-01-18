@@ -26,7 +26,7 @@ public final class SceneController {
 
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(owner);
-        Scene dialogScene = new Scene(fxmlLoader.load(), 600, 600);
+        Scene dialogScene = new Scene(fxmlLoader.load(), 1000, 800);
         dialogScene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         dialog.setScene(dialogScene);
         dialog.showAndWait();

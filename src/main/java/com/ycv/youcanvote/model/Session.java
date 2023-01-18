@@ -8,6 +8,7 @@ import com.ycv.youcanvote.entity.User;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 
 /**
@@ -19,7 +20,6 @@ import java.security.NoSuchAlgorithmException;
 public class Session {
     private static Session current = null;
     private User user = null;
-
     private final EntityManagerFactory entityManagerFactory;
     private final EntityManager entityManager;
 
@@ -45,11 +45,7 @@ public class Session {
      * @return true if the user has logged in, false otherwise
      */
     public boolean userLogged() {
-        if (user != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return user != null;
     }
 
     /**
@@ -59,13 +55,19 @@ public class Session {
      * @param forOperator must be true if the user is an operator otherwise false.
      * @throws WrongCredentialsException if the credentials are wrong.
      */
-    public void setUser(String cf, String pwd, boolean forOperator) throws WrongCredentialsException{
+    public void setUser(String cf, String pwd, boolean forOperator) throws WrongCredentialsException {
         if (!userLogged()) {
-            User user = User.getUserById(cf);
-            if(user.getPassword().equals(pwdToSHA256(pwd)) && (user.getOperator() || (!forOperator && !user.getOperator()))) {
+            try {
+                User user = Objects.requireNonNull(User.getUserById(cf));
+            } catch (NullPointerException e) {
+                throw new WrongCredentialsException("codice fiscale o password sbagliata");
+            }
+
+            if(user.getPassword().equals(pwdToSHA256(pwd)) &&
+                    (user.getOperator() || (!forOperator && !user.getOperator()))) {
                 this.user = user;
             } else {
-                throw new WrongCredentialsException();
+                throw new WrongCredentialsException("codice fiscale o password sbagliata");
             }
         }
     }
@@ -101,9 +103,6 @@ public class Session {
     public User getUser() {
         return user;
     }
-
-
-
 
     public EntityManager getEntityManager() {
         return entityManager;

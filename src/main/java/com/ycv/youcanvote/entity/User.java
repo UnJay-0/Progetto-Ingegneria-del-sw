@@ -34,6 +34,7 @@ import java.util.Objects;
 @Entity
 @Table(name="\"User\"")
 @NamedQuery(name = "User.byId", query="SELECT e FROM User e WHERE e.cf=?1")
+@NamedQuery(name= "User.all", query = "SELECT e FROM User e")
 public class User {
 
 
@@ -129,6 +130,18 @@ public class User {
 
     private void setOperator(Boolean operator) {
         isOperator = operator;
+    }
+
+    public static int nUser() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+
+        int n = entityManager.createNamedQuery("User.all", User.class).getResultList().size();
+
+        entityManager.getTransaction().commit();
+
+        return n;
+
     }
 
     @Override

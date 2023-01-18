@@ -70,6 +70,11 @@ public class Individual implements Candidate {
         this.name = name;
     }
 
+    @Override
+    public long getId() {
+        return this.individualId;
+    }
+
     public static Individual getIndividualById(long id) {
         EntityManager entityManager = Session.getInstance().getEntityManager();
         entityManager.getTransaction().begin();

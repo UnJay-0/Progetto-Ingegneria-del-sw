@@ -11,7 +11,6 @@ import org.kordamp.bootstrapfx.BootstrapFX;
 import java.io.IOException;
 
 
-import org.scenicview.ScenicView;
 
 public class YcvApplication extends Application {
 
@@ -20,7 +19,7 @@ public class YcvApplication extends Application {
         Session session = Session.getInstance();
         FXMLLoader fxmlLoader = new FXMLLoader(
                 YcvApplication.class.getResource("home.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 1000);
+        Scene scene = new Scene(fxmlLoader.load(), 1500, 1000);
         scene.getStylesheets().add(BootstrapFX.bootstrapFXStylesheet());
         stage.setTitle("YouCanVote!");
         stage.setScene(scene);
@@ -31,9 +30,6 @@ public class YcvApplication extends Application {
         });
         stage.show();
         stage.getScene().getRoot().requestFocus();
-        ScenicView.show(scene);
-
-
     }
 
     public static void main(String[] args) {

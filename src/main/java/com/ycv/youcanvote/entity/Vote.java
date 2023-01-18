@@ -27,6 +27,7 @@ import java.util.Objects;
  */
 @Entity
 @NamedQuery(name = "Vote.byVotingSession", query = "SELECT e FROM Vote e WHERE e.votingSessionByVsId.vsId=?1")
+@NamedQuery(name = "Vote.getBlankVotes", query = "SELECT e FROM Vote e WHERE e.votingSessionByVsId.vsId=?1 AND e.selection=?2")
 public class Vote {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vote_generator")
     @SequenceGenerator(name="vote_generator", sequenceName = "vote_sequence", allocationSize = 1)
@@ -121,5 +122,9 @@ public class Vote {
 
     private void setVotingSessionByVsId(VotingSession votingSessionByVsId) {
         this.votingSessionByVsId = votingSessionByVsId;
+    }
+
+    public String toString(){
+        return this.getSelection();
     }
 }

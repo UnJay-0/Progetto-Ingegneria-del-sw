@@ -16,7 +16,6 @@ public class VotingSessionBuilder {
 
     private boolean partyVoting;
 
-    // TODO: classi per la modalità di calcolo del risultato
     private VotingSession.ResultMod resultMod;
 
     public VotingSessionBuilder() {

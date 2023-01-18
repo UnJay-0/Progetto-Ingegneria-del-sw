@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.ycv.youcanvote.controller.results.HomeResults"
+      prefHeight="1000.0" prefWidth="1000.0"
+      stylesheets="@generalStyle.css">
+    <padding>
+        <Insets bottom="20.0" top="20.0" left="20.0" right="20.0" />
+    </padding>
+
+    <VBox style="-fx-alignment: top-left; -fx-spacing: 40;">
+        <padding>
+            <Insets bottom="20.0" top="20.0" />
+        </padding>
+        <Label style="-fx-font-size: 40">
+            Visualizza Risultati
+        </Label>
+        <Text style="-fx-font-size: 25">
+            Selezionare le sessioni di voto della quale si vuole
+            visualizzare i risultati.
+        </Text>
+    </VBox>
+
+    <VBox fx:id="formSpace" style="-fx-alignment: center;">
+        <padding>
+            <Insets bottom="20.0" top="20.0" />
+        </padding>
+    </VBox>
+
+    <HBox>
+        <padding>
+            <Insets  left="40.0" right="25.0" />
+        </padding>
+        <Button fx:id="exitButton" styleClass="btn" text="Termina" style="-fx-font-size: 25;"/>
+
+        <HBox>
+            <padding>
+                <Insets  left="250.0" right="405.0" />
+            </padding>
+        </HBox>
+
+        <Button fx:id="continueButton" styleClass="btn" text="Avanti" style="-fx-font-size: 25;"/>
+    </HBox>
+
+
+
+
+</VBox>

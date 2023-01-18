@@ -140,6 +140,11 @@ public class Party implements Candidate {
         this.individualsByPartyId = individualsByPartyId;
     }
 
+    @Override
+    public long getId() {
+        return this.getPartyId();
+    }
+
     public String toString() {
         return name + "\nId: " + partyId;
     }

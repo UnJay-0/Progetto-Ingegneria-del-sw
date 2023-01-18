@@ -68,7 +68,6 @@ public class LoginController {
         loginFormSpace.getChildren().add(logo);
         loginFormSpace.getChildren().add(new FormRenderer(loginForm));
         loginFormSpace.setAlignment(Pos.CENTER);
-
     }
 
     public void submit() {

@@ -3,8 +3,10 @@ package com.ycv.youcanvote.entity;
 import com.ycv.youcanvote.controller.vote.*;
 import com.ycv.youcanvote.controller.vote.CategoricalVoting;
 import com.ycv.youcanvote.controller.vote.Voting;
+import com.ycv.youcanvote.model.Answer;
 import com.ycv.youcanvote.model.Candidate;
 import com.ycv.youcanvote.entity.Party;
+import com.ycv.youcanvote.model.Results;
 import com.ycv.youcanvote.model.Session;
 import jakarta.persistence.*;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * OVERVIEW:
@@ -104,7 +107,19 @@ public class VotingSession {
         return TypeOfVote.fromString(typeOfVote).getController(this);
     }
 
+    public TypeOfVote getTypeOfVote() {
+        return TypeOfVote.fromString(type.split(";")[0]);
+    }
+
+    public  ResultMod getResultMod() {
+        return ResultMod.fromString(type.split(";")[1]);
+    }
+
     public List<Candidate> getCandidatesList() {
+
+        if(this.getTypeOfVote() == TypeOfVote.REFERENDUM) {
+            return Arrays.asList(new Answer("Favorevole"), new Answer("Contrario"));
+        }
         EntityManager entityManager = Session.getInstance().getEntityManager();
         List<Candidate> candidatesList = new ArrayList<>();
         for(String candidateToStr : candidates.split(";")) {
@@ -152,13 +167,28 @@ public class VotingSession {
      *
      * @return the number of votes already submitted for this voting session
      */
-    public int nVote(){
+    public int nVote() {
         EntityManager entityManager = Session.getInstance().getEntityManager();
-        TypedQuery<com.ycv.youcanvote.entity.Vote> getVotes = entityManager.createNamedQuery(
+        TypedQuery<Vote> getVotes = entityManager.createNamedQuery(
                 "Vote.byVotingSession",
-                com.ycv.youcanvote.entity.Vote.class);
+                Vote.class);
         getVotes.setParameter(1, this.vsId);
         return getVotes.getResultList().size();
+    }
+
+    /**
+     *
+     * @return the number of blank votes already submitted for this voting session
+     */
+    public int nBlankVotes() {
+        EntityManager entityManager = Session.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        TypedQuery<Vote> getBlankVotes = entityManager.createNamedQuery("Vote.getBlankVotes", Vote.class);
+        getBlankVotes.setParameter(1, this.vsId);
+        getBlankVotes.setParameter(2, "Bianca");
+        int n = getBlankVotes.getResultList().size();
+        entityManager.getTransaction().commit();
+        return n;
     }
 
     /**
@@ -208,7 +238,7 @@ public class VotingSession {
 
     /**
      *
-     * @return the date of creation of the voting session
+     * @return the date of creation of the voting session.
      */
     public Date getCreationDate() {
         return creationDate;
@@ -299,8 +329,76 @@ public class VotingSession {
 
     public enum TypeOfVote {
         RANKEDVOTE("Ordinale", Arrays.asList(ResultMod.MAJORITY, ResultMod.ABS_MAJORITY)) {
+
             Voting getController(VotingSession session) {
                 return new RankedVoting(session);
+            }
+
+
+            @Override
+            public List<Results> getResults(VotingSession session, ResultMod mod) {
+
+                EntityManager entityManager = Session.getInstance().getEntityManager();
+                List<Integer> weights = Arrays.asList(1, 4, 7, 10, 0);
+                Map<Candidate, Integer> ranking = new HashMap<>();
+                List<Candidate> candidates = session.getCandidatesList();
+                Candidate blank = new Answer("Bianca");
+                List<Vote> votes = Vote.getVotesByVsId(session.vsId);
+                candidates.forEach(candidate -> {
+                    for (Vote v : votes) {
+                        String selection = v.getSelection();
+                        if (selection.equals("Bianca")) {
+                            break;
+                        }
+                        int i = 0;
+                        for (String votedCandidate : selection.split(";")) {
+                            Long id = Long.parseLong(votedCandidate.split("\n")[1].split(" ")[1]);
+
+                            try {
+                                entityManager.getTransaction().begin();
+                                Candidate temp;
+                                TypedQuery<Individual> getIndividual = entityManager.createNamedQuery(
+                                        "Individual.byId", Individual.class);
+                                getIndividual.setParameter(1, id);
+
+                                if(getIndividual.getResultList().size() != 0) {
+                                    temp = getIndividual.getSingleResult();
+                                } else {
+                                    TypedQuery<Party> getParty = entityManager.createNamedQuery(
+                                            "Party.byId", Party.class);
+                                    getParty.setParameter(1, id);
+                                    temp = getParty.getSingleResult();
+                                }
+
+                                if (temp.equals(candidate)) {
+                                    if (ranking.containsKey(candidate)) {
+                                        ranking.replace(candidate, ranking.get(candidate) + weights.get(i));
+                                    } else
+                                        ranking.put(temp, weights.get(i));
+                                }
+                            } finally {
+                                entityManager.getTransaction().commit();
+                                if (i < 4) {
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                });
+
+                Map<Candidate, Integer> result = ranking.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByValue())
+                        .collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                Map.Entry<Candidate, Integer> entry = result.entrySet().iterator().next();
+                Candidate winner = null;
+                if (mod.isAbsolute(entry.getValue(), session.nVote())) {
+                    winner = entry.getKey();
+                }
+                return List.of(new Results(session, ranking, winner));
             }
 
         },
@@ -309,17 +407,181 @@ public class VotingSession {
             Voting getController(VotingSession session) {
                 return CategoricalVoting.createCategoricalVote(session);
             }
+
+            @Override
+            public List<Results> getResults(VotingSession session, ResultMod mod) {
+
+                EntityManager entityManager = Session.getInstance().getEntityManager();
+                Map<Candidate, Integer> ranking = new HashMap<>();
+                List<Candidate> candidates = session.getCandidatesList();
+                Candidate blank = new Answer("Bianca");
+                List<Vote> votes = Vote.getVotesByVsId(session.vsId);
+                candidates.forEach(candidate -> {
+                    for (Vote v : votes) {
+                        String selection = v.getSelection();
+                        if (selection.equals("Bianca")) {
+                            break;
+                        }
+                        Long id = Long.parseLong(selection.split("\n")[1].split(" ")[1]);
+                        try {
+                            entityManager.getTransaction().begin();
+                            Candidate temp;
+                            TypedQuery<Individual> getIndividual = entityManager.createNamedQuery(
+                                    "Individual.byId", Individual.class);
+                            getIndividual.setParameter(1, id);
+
+                            if(getIndividual.getResultList().size() != 0) {
+                                temp = getIndividual.getSingleResult();
+                            } else {
+                                TypedQuery<Party> getParty = entityManager.createNamedQuery(
+                                        "Party.byId", Party.class);
+                                getParty.setParameter(1, id);
+                                temp = getParty.getSingleResult();
+                            }
+
+                            if (temp.equals(candidate)) {
+                                if (ranking.containsKey(candidate)) {
+                                    ranking.replace(candidate, ranking.get(candidate) + 1);
+                                } else
+                                    ranking.put(temp, 1);
+                            }
+                        } finally {
+                            entityManager.getTransaction().commit();
+                        }
+                    }
+                });
+
+                Map<Candidate, Integer> result = ranking.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                Map.Entry<Candidate, Integer> entry = result.entrySet().iterator().next();
+                Candidate winner = null;
+                if (mod.isAbsolute(entry.getValue(), session.nVote())) {
+                    winner = entry.getKey();
+                }
+                return List.of(new Results(session, result, winner));
+            }
         },
         PREFERENTIALVOTE("Categorico Preferenziale", Arrays.asList(VotingSession.ResultMod.MAJORITY, VotingSession.ResultMod.ABS_MAJORITY)) {
 
             Voting getController(VotingSession session) {
                 return CategoricalVoting.createPreferentialVote(session);
             }
+
+            @Override
+            public List<Results> getResults(VotingSession session, ResultMod mod) {
+                Map<Candidate, Integer> ranking = new HashMap<>();
+                Map<Candidate, Integer> ranking2 = new HashMap<>();
+                List<Candidate> candidates = session.getCandidatesList();
+                List<Vote> votes = Vote.getVotesByVsId(session.vsId);
+                candidates.forEach(candidate -> {
+                    for (Vote v : votes) {
+                        String selection = v.getSelection();
+                        if (selection.equals("Bianca")) {
+                            break;
+                        }
+                        long id = Long.parseLong(selection.split("\n")[1].split(" ")[1].split(";")[0]);
+
+                        Candidate temp = Party.getPartyById(id);
+                        if (temp.equals(candidate)) {
+                            if (ranking.containsKey(candidate)) {
+                                ranking.replace(candidate, ranking.get(candidate) + 1);
+                            } else
+                                ranking.put(temp, 1);
+                        }
+                    }
+                });
+
+                Map<Candidate, Integer> result = ranking.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                Map.Entry<Candidate, Integer> entry = result.entrySet().iterator().next();
+                Candidate winner = null;
+                if (mod.isAbsolute(entry.getValue(), session.nVote())) {
+                    winner = entry.getKey();
+                }
+                if (winner == null) {
+                    return List.of(new Results(session, ranking, null));
+                } else {
+                    List<Individual> members = Individual.getIndividualByPartyId(winner.getId());
+                    for(Vote v : votes) {
+                        String selection = v.getSelection();
+                        if (!selection.equals("Bianca")) {
+                            for(Individual member: members) {
+                                for (String votedCandidate :
+                                        List.of(selection.split(";"))
+                                                .subList(1, selection.split(";").length))
+                                {
+                                    long id = Long.parseLong(votedCandidate.split("\n")[1].split(" ")[1]);
+                                    Individual temp = Individual.getIndividualById(id);
+                                    if (temp.equals(member)) {
+                                        if (ranking2.containsKey(member)) {
+                                            ranking2.replace(member, ranking2.get(member) + 1);
+                                        } else
+                                            ranking2.put(temp, 1);
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+
+                    Map<Candidate, Integer> resultMembers = ranking2.entrySet()
+                            .stream()
+                            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                            .collect(Collectors.toMap(
+                                    Map.Entry::getKey,
+                                    Map.Entry::getValue,
+                                    (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                    Map.Entry<Candidate, Integer> entryMembers = resultMembers.entrySet().iterator().next();
+                    System.out.println(entryMembers.getKey());
+                    return Arrays.asList(new Results(session, ranking, winner), new Results(session, resultMembers, entryMembers.getKey()));
+                }
+            }
         },
 
         REFERENDUM("Referendum", Arrays.asList(ResultMod.W_QUORUM, ResultMod.WO_QUORUM)) {
             Voting getController(VotingSession session) {
                 return new Referendum(session);
+            }
+
+            @Override
+            public List<Results> getResults(VotingSession session, ResultMod mod) {
+                Map<Candidate, Integer> ranking = new HashMap<>();
+                List<Candidate> candidates = session.getCandidatesList();
+                List<Vote> votes = Vote.getVotesByVsId(session.vsId);
+                System.out.println(votes);
+                candidates.forEach(candidate -> {
+                    for (Vote v : votes) {
+                        String selection = v.getSelection();
+                        if (selection.equals(candidate.name())) {
+                            if (ranking.containsKey(candidate)) {
+                                ranking.replace(candidate, ranking.get(candidate) + 1);
+                            } else
+                                ranking.put(candidate, 1);
+                        }
+                    }
+                });
+
+                Map<Candidate, Integer> result = ranking.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue,
+                                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+                Map.Entry<Candidate, Integer> entry = result.entrySet().iterator().next();
+
+                return List.of(new Results(session, result, entry.getKey()));
             }
         };
 
@@ -344,8 +606,9 @@ public class VotingSession {
 
         abstract Voting getController(VotingSession session);
 
-        public List<ResultMod> getMods() {
+        public abstract List<Results> getResults(VotingSession session, ResultMod mod);
 
+        public List<ResultMod> getMods() {
             return new ArrayList<>(this.mods);
         }
 
@@ -356,10 +619,47 @@ public class VotingSession {
 
     }
     public enum ResultMod {
-        MAJORITY("Maggioranza"),
-        ABS_MAJORITY("Maggioranza assoluta"),
-        WO_QUORUM("Senza quorum"),
-        W_QUORUM("Con quorum");
+        MAJORITY("Maggioranza") {
+            /**
+             * @param nVotes number of votes of the candidate with the highest number of votes.
+             * @return true.
+             */
+            @Override
+            boolean isAbsolute(int nVotes, int totalVotes) {
+                return true;
+            }
+        },
+        ABS_MAJORITY("Maggioranza assoluta"){
+            /**
+             * @param nVotes number of votes of the candidate with the highest number of votes.
+             * @return true if nVotes is higher or equal of 50%+1 of the total votes.
+             */
+            @Override
+            boolean isAbsolute(int nVotes, int totalVotes) {
+                return nVotes >= (totalVotes * 50 / 100) + 1;
+            }
+        },
+        WO_QUORUM("Senza quorum"){
+            /**
+             * @param nVotes number of submitted vote of the referendum.
+             * @return true.
+             */
+            @Override
+            boolean isAbsolute(int nVotes, int totalVotes) {
+                return true;
+            }
+        },
+        W_QUORUM("Con quorum"){
+            /**
+             * @param nVotes number of submitted vote of the referendum
+             * @return true if the number of submitted vote is higher or equal of 50%+1 of the people able top vote,
+             *          false otherwise.
+             */
+            @Override
+            boolean isAbsolute(int nVotes, int totalVotes) {
+                return nVotes >= (totalVotes * 50 / 100) + 1;
+            }
+        };
 
         private final String name;
 
@@ -374,6 +674,8 @@ public class VotingSession {
             for (ResultMod mod : values())
                 stringToEnum.put(mod.name, mod);
         }
+
+        abstract boolean isAbsolute(int nVotes, int totalVotes);
 
         public String toString() {
             return name;

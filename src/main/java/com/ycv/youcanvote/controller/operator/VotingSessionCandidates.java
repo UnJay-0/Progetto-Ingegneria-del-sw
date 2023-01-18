@@ -51,7 +51,6 @@ public class VotingSessionCandidates {
 
     @FXML
     private void initialize() {
-
         if(build.isPartyVoting()){
             List<Party> parties = Party.getParty();
             toSelect = new ArrayList<>(parties);

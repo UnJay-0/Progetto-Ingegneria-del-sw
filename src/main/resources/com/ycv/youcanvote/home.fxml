@@ -26,7 +26,7 @@
                 <padding>
                     <Insets bottom="35.0" left="25.0" right="25.0" top="35.0" />
                 </padding>
-                <Button styleClass="btn" text="Visualizza risultati" />
+                <Button styleClass="btn" text="Visualizza risultati" onAction="#visualizza"/>
                 <Button styleClass="btn" text="Vota" onAction="#vota" />
             </HBox>
         </VBox>

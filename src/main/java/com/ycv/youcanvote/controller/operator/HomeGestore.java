@@ -45,4 +45,15 @@ public class HomeGestore {
             throw new RuntimeException(e);
         }
     }
+
+    @FXML
+    private void back(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        try {
+            Session.getInstance().removeUser();
+            SceneController.switchScene(node, "home.fxml");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

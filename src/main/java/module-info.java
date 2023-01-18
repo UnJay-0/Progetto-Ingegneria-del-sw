@@ -5,7 +5,6 @@ module com.ycv.youcanvote {
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires org.scenicview.scenicview;
     requires transitive javafx.web;
     requires transitive javafx.swing;
     requires jakarta.persistence;
@@ -26,4 +25,6 @@ module com.ycv.youcanvote {
     opens com.ycv.youcanvote.controller.operator to javafx.fxml;
     opens com.ycv.youcanvote.entity;
     exports com.ycv.youcanvote.entity;
+    exports com.ycv.youcanvote.controller.results;
+    opens com.ycv.youcanvote.controller.results to javafx.fxml;
 }

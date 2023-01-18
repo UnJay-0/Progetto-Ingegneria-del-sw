@@ -42,7 +42,7 @@ public class ConfirmVote {
 
     private void cancelVote() {
         try {
-            SceneController.switchScene(cancelButton, "voting.fxml", voting);
+            SceneController.switchScene(cancelButton, "vote.fxml", voting);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

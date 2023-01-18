@@ -74,11 +74,6 @@
             <version>19</version>
         </dependency>
         <dependency>
-            <groupId>net.raumzeitfalle.fx</groupId>
-            <artifactId>scenic-view</artifactId>
-            <version>11.0.2</version>
-        </dependency>
-        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>23.1.0</version>
@@ -102,6 +97,7 @@
     </dependencies>
 
     <build>
+        <testSourceDirectory>src/main/test</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -121,7 +117,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.ycv.youcanvote/com.ycv.youcanvote.HelloApplication</mainClass>
+                            <mainClass>com.ycv.youcanvote/com.ycv.youcanvote.YcvApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

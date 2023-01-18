@@ -40,7 +40,7 @@ public class VotingSessionType {
     private void initialize() {
         Label label = new Label("Seleziona la tipologia di voto");
         label.setStyle("-fx-font-size: 27; -fx-fill: rgb(25, 69, 107);");
-        selection = Field.ofSingleSelectionType(Arrays.asList(TypeOfVote.values()));
+        selection = Field.ofSingleSelectionType(Arrays.asList(TypeOfVote.values()), 1);
         Form form = Form.of(
                 Group.of(
                         selection

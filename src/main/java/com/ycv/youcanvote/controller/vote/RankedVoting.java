@@ -111,7 +111,7 @@ public class RankedVoting implements Voting {
 
     private String selectionToString() {
         StringBuilder str = new StringBuilder();
-        for(Candidate c : candidateSelect.getSelection()) {
+        for(Candidate c : candidates) {
             str.append(c.toString()).append(";");
         }
         return str.toString();

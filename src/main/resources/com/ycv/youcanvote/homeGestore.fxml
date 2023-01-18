@@ -27,6 +27,7 @@
         <Button styleClass="btn" text="Crea sessione di voto" onAction="#createVotingSession"/>
         <Button styleClass="btn" text="Gestisci sessioni di voto" onAction="#manageVotingSession"/>
         <Button styleClass="btn" text="Gestisci candidati" onAction="#manageCandidates"/>
+        <Button styleClass="btn" text="Indietro" onAction="#back"/>
     </VBox>
 
 

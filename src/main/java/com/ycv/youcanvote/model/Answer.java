@@ -20,4 +20,9 @@ public class Answer implements Candidate {
     public void alterName(String name) {
 
     }
+
+    @Override
+    public long getId() {
+        return 0;
+    }
 }

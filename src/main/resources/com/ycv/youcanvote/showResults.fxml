@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="400.0" prefWidth="600.0"
+      stylesheets="@generalStyle.css">
+    <padding>
+        <Insets bottom="20.0" top="20.0" left="20.0" right="20.0" />
+    </padding>
+
+    <HBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 30">
+            Sessione:
+        </Label>
+        <Text fx:id="votingSessionName" style="-fx-font-size: 30">
+
+        </Text>
+    </HBox>
+    <HBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 20">
+            Tipologia:
+        </Label>
+        <Text fx:id="votingSessionType" style="-fx-font-size: 20">
+
+        </Text>
+    </HBox>
+
+    <HBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 20">
+            Affluenza:
+        </Label>
+        <Text fx:id="affluence" style="-fx-font-size: 20">
+
+        </Text>
+    </HBox>
+
+    <HBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 20">
+            Numero totale di voti:
+        </Label>
+        <Text fx:id="totalVotes" style="-fx-font-size: 20">
+
+        </Text>
+    </HBox>
+
+    <HBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 20">
+            Numero totale di schede bianche:
+        </Label>
+        <Text fx:id="totalBlanks" style="-fx-font-size: 20">
+
+        </Text>
+    </HBox>
+
+    <VBox style="-fx-spacing: 10">
+        <padding>
+            <Insets bottom="5.0" top="5.0" />
+        </padding>
+        <Label style="-fx-font-size: 25">
+            Vincitore
+        </Label>
+        <Text fx:id="winners" style="-fx-font-size: 17">
+
+        </Text>
+    </VBox>
+</VBox>
